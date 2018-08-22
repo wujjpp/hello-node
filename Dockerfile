@@ -9,4 +9,4 @@ WORKDIR /usr/local/app/
 # RUN npm config set registry=http://registry.npm.taobao.org
 RUN npm install && npm cache clean --force
 
-CMD ["node", "app.js" ]
+CMD ["node", "server.js" ]
