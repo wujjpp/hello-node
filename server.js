@@ -29,11 +29,20 @@ app.get('/delay', (req, res, next) => {
   }, timeout * 1000)
 })
 
+let consoleLogger = console
 
-app.listen(PORT, err => {
+const server = app.listen(PORT, err => {
   if (err) {
-    console.error(err);
+    consoleLogger.error(err)
   } else {
-    console.log(`server listening on ${PORT}`)
+    consoleLogger.log(`Listening at http://localhost:${PORT}/`)
   }
 })
+
+process.on("SIGTERM", () => {
+  consoleLogger.log("Process received 'SIGTERM'")
+  server.close(() => {
+    consoleLogger.log("Server graceful shutdown")
+    process.exit(0)
+  });
+});
