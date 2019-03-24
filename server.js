@@ -18,6 +18,17 @@ app.get('/ipv4', (req, res, next) => {
   res.send(`${IPv4}, ${hostName}`)
 });
 
+app.get('/delay', (req, res, next) => {
+  let timeout = ((+req.query.timeout) || 10);
+  let start = new Date()
+  setTimeout(() => {
+    res.json({
+      start,
+      end: new Date()
+    })
+  }, timeout * 1000)
+})
+
 
 app.listen(PORT, err => {
   if (err) {

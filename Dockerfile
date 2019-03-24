@@ -1,5 +1,8 @@
 FROM node:8.11.3-alpine
 
+RUN cp /etc/apk/repositories /etc/apk/repositories.bak
+RUN echo "http://mirrors.aliyun.com/alpine/v$(cat /etc/alpine-release | cut -b 1-3)/main/" > /etc/apk/repositories
+
 # Copy application files
 COPY . /usr/local/app/
 WORKDIR /usr/local/app/
