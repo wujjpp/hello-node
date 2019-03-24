@@ -2,6 +2,7 @@ const express = require('express')
 const os = require('os')
 const app = express()
 const PORT = 9000
+const consoleLogger = require('./console-logger')
 
 app.get('/', (req, res, next) => {
   res.send(JSON.stringify(os.networkInterfaces(), null, 2))
@@ -28,8 +29,6 @@ app.get('/delay', (req, res, next) => {
     })
   }, timeout * 1000)
 })
-
-let consoleLogger = console
 
 const server = app.listen(PORT, err => {
   if (err) {
